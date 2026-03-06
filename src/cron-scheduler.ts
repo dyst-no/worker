@@ -16,13 +16,23 @@ type CronSchedulerOptions = {
 export async function cronScheduler(opts: CronSchedulerOptions) {
   console.debug(`Worker ${opts.name} will run on cron expression ${opts.cronExpression}`);
 
+  let isRunning = false;
+
   // Wrap the worker in a try catch to avoid crashing the cron job
   async function runCronWorkerFn() {
+    if (isRunning) {
+      console.debug(`Worker ${opts.name} skipped because previous run is still in flight`);
+      return;
+    }
+    isRunning = true;
+
     try {
       await opts.worker();
     } catch (error) {
       console.error(error);
       console.error(`Error running worker ${opts.name}.`, error instanceof Error ? error.message : String(error));
+    } finally {
+      isRunning = false;
     }
   }
 

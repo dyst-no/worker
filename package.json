@@ -1,6 +1,6 @@
 {
   "name": "@dyst-no/worker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypeScript helpers for cron and event-driven background workers.",
   "keywords": [
     "worker",

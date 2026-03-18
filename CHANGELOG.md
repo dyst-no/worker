@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 - 2026-03-18
+
+- add install command to readme ([`2984156`](https://github.com/dyst-no/worker/commit/2984156f4f29023c15d14774a88db14183cc1dd2))
+
 ## 0.1.0 - 2026-03-18
 
 - (feat): initial public repo ([`f5b9199`](https://github.com/dyst-no/worker/commit/f5b91992b4bef918c630f9b82a6cc50ba2721e18))

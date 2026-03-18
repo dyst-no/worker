@@ -2,6 +2,12 @@
 
 A simple TypeScript library providing helper functions for scheduling background workers in Node.js applications.
 
+Install with:
+
+```bash
+bun add @dyst-no/worker
+```
+
 ## Features
 
 ### Cron Scheduler

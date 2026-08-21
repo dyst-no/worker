@@ -1,5 +1,6 @@
 import type { Logger } from 'pino';
 import type postgres from 'postgres';
+import { withTimeout } from './with-timeout';
 
 type WorkerOptions = {
   name: string;
@@ -10,6 +11,17 @@ type WorkerOptions = {
   atLeastEveryMs?: number;
   runOnStartUp?: boolean;
   logger?: Logger;
+  /**
+   * Reject a run that exceeds this many milliseconds. Without it, a run whose
+   * promise never settles (e.g. a query on a dead database connection) leaves
+   * isRunning set forever, permanently disabling both the topic listeners and
+   * the atLeastEveryMs timer until the process restarts.
+   *
+   * Note: a timed-out run is abandoned, not cancelled. If it resurrects it may
+   * overlap the next run, so only set this on workers that tolerate concurrent
+   * runs.
+   */
+  timeoutMs?: number;
   worker: () => Promise<unknown>;
 };
 
@@ -28,10 +40,12 @@ export async function workScheduler(opts: WorkerOptions) {
       clearTimeout(timeout);
     }
 
+    const start = performance.now();
     try {
-      await opts.worker();
+      await withTimeout(opts.name, opts.worker, opts.timeoutMs);
+      opts.logger?.debug(`Worker ${opts.name} run finished in ${Math.round(performance.now() - start)}ms`);
     } catch (err) {
-      opts.logger?.error(err, 'Error running worker');
+      opts.logger?.error(err, `Error running worker ${opts.name} after ${Math.round(performance.now() - start)}ms`);
     } finally {
       isRunning = false;
       if (opts.atLeastEveryMs) {

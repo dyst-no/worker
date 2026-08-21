@@ -1,4 +1,5 @@
 import nodeCron from 'node-cron';
+import { withTimeout } from './with-timeout';
 
 export enum CronExpression {
   EVERY_MINUTE = '* * * * *',
@@ -11,6 +12,8 @@ type CronSchedulerOptions = {
   cronExpression: CronExpression | string;
   worker: () => Promise<unknown>;
   runOnStartUp?: boolean;
+  /** See WorkerOptions.timeoutMs — prevents a never-settling run from wedging isRunning forever. */
+  timeoutMs?: number;
 };
 
 export async function cronScheduler(opts: CronSchedulerOptions) {
@@ -27,7 +30,7 @@ export async function cronScheduler(opts: CronSchedulerOptions) {
     isRunning = true;
 
     try {
-      await opts.worker();
+      await withTimeout(opts.name, opts.worker, opts.timeoutMs);
     } catch (error) {
       console.error(error);
       console.error(`Error running worker ${opts.name}.`, error instanceof Error ? error.message : String(error));

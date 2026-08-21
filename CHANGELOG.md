@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 - 2026-08-21
+
+- use tsc for worker typecheck ([`1de8835`](https://github.com/dyst-no/worker/commit/1de883533a405b5a8df8f62cdcd713a5f87ba1c3))
+- chore: add bunfig minimumReleaseAge of 7 days ([`24f2362`](https://github.com/dyst-no/worker/commit/24f23624c3cdde524fc9837c955643cb6a22bdcd))
+- chore: exclude @dyst-no/* scope from minimumReleaseAge gate ([`2fa86c6`](https://github.com/dyst-no/worker/commit/2fa86c6424300371a19162740f8073032e7e90b8))
+- Merge pull request #1 from dyst-no/chore/bunfig-min-release-age ([`7ca9078`](https://github.com/dyst-no/worker/commit/7ca9078ebfda2c404a6bad44cc2b1eb412008add))
+- Add timeoutMs option so a never-settling run cannot wedge isRunning (#2) ([`a2532ae`](https://github.com/dyst-no/worker/commit/a2532ae5e6a65daa40f84be469142e9da6ae2d05))
+
 ## 0.1.1 - 2026-03-18
 
 - add install command to readme ([`2984156`](https://github.com/dyst-no/worker/commit/2984156f4f29023c15d14774a88db14183cc1dd2))

@@ -38,7 +38,7 @@
   "scripts": {
     "build": "tsdown",
     "format": "biome check --write --error-on-warnings .",
-    "typecheck": "tsc --pretty false --noEmit",
+    "typecheck": "bun check --no-pretty",
     "release": "node scripts/release.mjs",
     "release:patch": "node scripts/release.mjs patch",
     "release:minor": "node scripts/release.mjs minor",

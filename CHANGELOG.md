@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0 - 2026-11-13
+
+- Type check with bun check instead of tsc (#3) ([`3a21e55`](https://github.com/dyst-no/worker/commit/3a21e55aa5e1bd60bc8f4e9e4ac69d0ac760fb4b))
+- Drop pino and pino-pretty; the optional logger is any object with debug, error and trace ([`eee7f96`](https://github.com/dyst-no/worker/commit/eee7f964f262450daa386a57367c54294b83d5ba))
+- Merge pull request #4 from dyst-no/drop-pino ([`e82bb37`](https://github.com/dyst-no/worker/commit/e82bb37b45a14ade6752b3238109c53c380d8d34))
+
 ## 0.2.0 - 2026-08-21
 
 - use tsc for worker typecheck ([`1de8835`](https://github.com/dyst-no/worker/commit/1de883533a405b5a8df8f62cdcd713a5f87ba1c3))

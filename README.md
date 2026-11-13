@@ -48,7 +48,7 @@ await workScheduler({
   worker: async () => {
     // Your worker logic here
   },
-  logger: pinoLogger
+  logger: pinoLogger, // optional: pino, console, or anything with debug, error and trace
 });
 ```
 

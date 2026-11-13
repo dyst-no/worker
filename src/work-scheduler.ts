@@ -1,6 +1,12 @@
-import type { Logger } from 'pino';
 import type postgres from 'postgres';
 import { withTimeout } from './with-timeout';
+
+/** Anything with these methods, such as a pino logger. */
+export type Logger = {
+  debug(message: string): void;
+  error(error: unknown, message: string): void;
+  trace(message: string): void;
+};
 
 type WorkerOptions = {
   name: string;

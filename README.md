@@ -72,8 +72,8 @@ the logging and the returned run function are unchanged, and `CronExpression.EVE
   `0 0 13 * 5` used to fire only on Friday the 13th; it now fires on every 13th and on every Friday.
 - **Step ranges count from the start of the range.** `1-30/2 * * * *` used to fire at minutes 2, 4, ..., 30; it now
   fires at minutes 1, 3, ..., 29.
-- **Weekday ranges that end in 7 are read as ending on Sunday.** `0 0 * * 5-7` used to fire on Thursday and on
-  Sunday to Wednesday; it now fires on Friday, Saturday and Sunday.
+- **Weekday ranges that end in 7 are read as ending on Sunday.** `0 0 * * 5-7` used to fire on every day except
+  Saturday; it now fires on Friday, Saturday and Sunday.
 - **Daylight-saving changes.** A job set for a time that does not exist on the spring-forward day used to be skipped
   that day; it now runs when the clock has moved past the gap (`30 2 * * *` in Europe/Oslo runs at 03:30 on
   2026-03-29). A job set for a fixed time in the repeated hour on the fall-back day used to run twice; it now runs

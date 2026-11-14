@@ -48,8 +48,6 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.2",
     "@types/bun": "^1.4.4",
-    "@types/node-cron": "^3.0.11",
-    "node-cron": "^3.0.3",
     "postgres": "^3.4.5",
     "tsdown": "^0.21.4",
     "typescript": "^5.9.3"

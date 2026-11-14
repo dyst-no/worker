@@ -136,8 +136,9 @@ describe('cronScheduler', () => {
     await run();
     expect(error).toHaveBeenCalledWith('Error running worker stuck.', 'Worker stuck run timed out after 5ms');
 
-    void run();
+    const second = run();
     expect(worker).toHaveBeenCalledTimes(2);
+    await second;
   });
 
   test('rejects, without running the worker, an expression Bun.cron rejects', async () => {

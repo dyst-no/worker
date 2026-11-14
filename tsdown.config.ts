@@ -7,6 +7,6 @@ export default defineConfig({
   clean: true,
   sourcemap: true,
   deps: {
-    neverBundle: ['node-cron', 'pino', 'pino-pretty', 'postgres'],
+    neverBundle: ['pino', 'pino-pretty', 'postgres'],
   },
 });

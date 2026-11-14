@@ -1,4 +1,3 @@
-import nodeCron from 'node-cron';
 import { withTimeout } from './with-timeout';
 
 export enum CronExpression {
@@ -39,7 +38,13 @@ export async function cronScheduler(opts: CronSchedulerOptions) {
     }
   }
 
-  nodeCron.schedule(opts.cronExpression, runCronWorkerFn);
+  // Bun.cron waits for a returned promise before it schedules the next fire. Not
+  // returning it keeps node-cron's behaviour: every tick calls runCronWorkerFn,
+  // which skips and logs while a run is still in flight. runCronWorkerFn never
+  // rejects, so nothing is left unhandled.
+  Bun.cron(opts.cronExpression, () => {
+    void runCronWorkerFn();
+  });
 
   if (opts.runOnStartUp) {
     await runCronWorkerFn();
